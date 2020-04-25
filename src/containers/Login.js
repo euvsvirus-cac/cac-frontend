@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 
 import { AppContext } from "../context/AppContext";
+
+const style = {
+    margin: 15,
+};
 
 class Login extends Component {
     static contextType = AppContext;
@@ -22,7 +25,7 @@ class Login extends Component {
         }
     }
 
-    handleClick = () => {
+    handleClick = (event) => {
         console.log('Login clicked...', this.state);
 
         const context = this.context;
@@ -49,44 +52,46 @@ class Login extends Component {
             .catch(function (error) {
                 alert(`${error}`);
             });
+
+        event.preventDefault();
     }
 
     render() {
         return (
-            <div>
-                <div>
-                    <AppBar
-                        position="static">
-                        <Toolbar>
-                            <Typography variant="h6">
-                                Login
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
+            <div style={{ display: 'flex', justifyContent: 'center', padding: 40 }}>
+                <Paper style={{ width: 240, padding: 20 }}>
 
-                    <TextField
-                        type="email"
-                        label="Email"
-                        margin="normal"
-                        onChange={(event) => { this.setState({ username: event.target.value }) }}
-                    />
-                    <br />
-                    <TextField
-                        type="password"
-                        margin="normal"
-                        label="Password"
-                        onChange={(event) => this.setState({ password: event.target.value })}
-                    />
-                    <br />
-                    <Button variant="contained" color="primary" style={style} onClick={(event) => this.handleClick(event)}>Login</Button>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        Login
+                    </Typography>
 
-                    <Link to="/">Cancel</Link>
-                </div>
+                    <form onSubmit={this.handleClick}>
+                        <TextField
+                            type="email"
+                            required
+                            variant="outlined"
+                            label="Email"
+                            margin="normal"
+                            onChange={(event) => { this.setState({ username: event.target.value }) }}
+                        />
+
+                        <TextField
+                            type="password"
+                            required
+                            variant="outlined"
+                            margin="normal"
+                            label="Password"
+                            onChange={(event) => this.setState({ password: event.target.value })}
+                        />
+
+                        <Button type="submit" variant="contained" color="primary" style={style}>Login</Button>
+
+                        <Link to="/">Cancel</Link>
+                    </form>
+                </Paper>
             </div>
         );
     }
 }
-const style = {
-    margin: 15,
-};
+
 export default withRouter(Login);

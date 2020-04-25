@@ -11,12 +11,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { useAppContext } from '../context/AppContext';
 
-const wrapperStyle = {
-    padding: 0,
-    margin: 0,
-    minHeight: '94vh', /* TODO: full height fix */
-    background: 'linear-gradient(to left, #3498db, #4f6f8f)'
-}
 const contentStyle = {
     padding: '40px'
 }
@@ -35,7 +29,7 @@ export default function Home() {
     const classes = useStyles();
 
     return (
-        <div style={wrapperStyle}>
+        <>
             <div style={contentStyle}>
                 <Typography style={claimStyle} gutterBottom variant="h3" component="h2">
                     Consult-a-Colleague
@@ -82,6 +76,6 @@ export default function Home() {
                     )
                 })}
             </Grid>
-        </div >
+        </>
     );
 }
