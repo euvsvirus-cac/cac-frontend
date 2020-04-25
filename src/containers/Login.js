@@ -18,18 +18,20 @@ class Login extends Component {
 
     constructor(props) {
         super(props);
-        console.log(this.context);
         this.state = {
             username: '',
             password: ''
         }
     }
 
-    handleClick = (event) => {
-        console.log('Login clicked...', this.state);
+    handleSuccessfulLogin = (token) => {
+        sessionStorage.setItem('jwtToken', token);
+        this.context.userHasAuthenticated(true);
+        this.props.history.replace('/');
+    }
 
-        const context = this.context;
-        const props = this.props;
+    handleClick = (event) => {
+        const me = this;
 
         const apiBaseUrl = "http://basehack1.informatik.uni-hamburg.de/api/";
         const payload = {
@@ -38,13 +40,9 @@ class Login extends Component {
         }
 
         axios.post(apiBaseUrl + 'login', payload)
-            .then(function (response) {
-                console.log(response);
+            .then((response) => {
                 if (response.status === 200 && response.data.token) {
-                    sessionStorage.setItem('jwtToken', response.data.token);
-                    context.userHasAuthenticated(true);
-                    console.log(context);
-                    props.history.replace('/');
+                    me.handleSuccessfulLogin(response.data.token);
                 } else {
                     alert(`Error ${response.data.code}`);
                 }
