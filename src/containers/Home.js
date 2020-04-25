@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
@@ -45,32 +44,32 @@ export default function Home() {
 
             <Grid container alignItems="center" justify="center" spacing={3} style={contentStyle}>
                 {[{
+                    key: 'need-assistance',
                     image: '/images/office-no-help.jpg',
                     caption: 'Need assistance?',
                     subtitle: 'Find the right colleague in seconds.'
                 }, {
+                    key: 'give-assistance',
                     image: '/images/office-help.jpg',
                     caption: 'Have some time to spare?',
                     subtitle: 'Offer your colleagues help.'
                 },].map(item => {
                     return (
-                        <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Grid key={item.key} item xs={12} sm={6} md={4} lg={3}>
                             <Card>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={classes.media}
-                                        image={item.image}
-                                        title="Contemplative Reptile"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {item.caption}
-                                        </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">
-                                            {item.subtitle}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
+                                <CardMedia
+                                    className={classes.media}
+                                    image={item.image}
+                                    title="Contemplative Reptile"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        {item.caption}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        {item.subtitle}
+                                    </Typography>
+                                </CardContent>
                             </Card>
                         </Grid>
                     )
