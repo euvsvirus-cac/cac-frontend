@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,9 +8,14 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 
+import { AppContext } from "../context/AppContext";
+
 class Login extends Component {
+    static contextType = AppContext;
+
     constructor(props) {
         super(props);
+        console.log(this.context);
         this.state = {
             username: '',
             password: ''
@@ -19,7 +25,10 @@ class Login extends Component {
     handleClick = () => {
         console.log('Login clicked...', this.state);
 
-        const apiBaseUrl = "http://localhost:8080/api/";
+        const context = this.context;
+        const props = this.props;
+
+        const apiBaseUrl = "http://basehack1.informatik.uni-hamburg.de/api/";
         const payload = {
             "email": this.state.username,
             "password": this.state.password
@@ -28,8 +37,11 @@ class Login extends Component {
         axios.post(apiBaseUrl + 'login', payload)
             .then(function (response) {
                 console.log(response);
-                if (response.status === 200) {
-                    alert(`Login successful ${response.data.token}`)
+                if (response.status === 200 && response.data.token) {
+                    sessionStorage.setItem('jwtToken', response.data.token);
+                    context.userHasAuthenticated(true);
+                    console.log(context);
+                    props.history.replace('/');
                 } else {
                     alert(`Error ${response.data.code}`);
                 }
@@ -67,6 +79,8 @@ class Login extends Component {
                     />
                     <br />
                     <Button variant="contained" color="primary" style={style} onClick={(event) => this.handleClick(event)}>Login</Button>
+
+                    <Link to="/">Cancel</Link>
                 </div>
             </div>
         );
@@ -75,4 +89,4 @@ class Login extends Component {
 const style = {
     margin: 15,
 };
-export default Login;
+export default withRouter(Login);
