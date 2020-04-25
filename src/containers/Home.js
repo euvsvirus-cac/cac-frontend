@@ -14,11 +14,14 @@ import { useAppContext } from '../context/AppContext';
 const wrapperStyle = {
     padding: 0,
     margin: 0,
-    minHeight: "90vh",
-    background: "linear-gradient(to left, #3498db, #4f6f8f)"
+    minHeight: '94vh', /* TODO: full height fix */
+    background: 'linear-gradient(to left, #3498db, #4f6f8f)'
 }
 const contentStyle = {
-    padding: "40px"
+    padding: '40px'
+}
+const claimStyle = {
+    color: 'white'
 }
 const useStyles = makeStyles({
     media: {
@@ -34,8 +37,12 @@ export default function Home() {
     return (
         <div style={wrapperStyle}>
             <div style={contentStyle}>
-                <h1>Home</h1>
-                <p>Welcome to Consult-A-Colleague!</p>
+                <Typography style={claimStyle} gutterBottom variant="h3" component="h2">
+                    Consult-a-Colleague
+                </Typography>
+                <Typography style={claimStyle} gutterBottom variant="h5" component="h2">
+                    Enable effective collaboration and break the feeling of isolation working from home.
+                </Typography>
 
                 {!isAuthenticated &&
                     <Link to="/login">Login</Link>
