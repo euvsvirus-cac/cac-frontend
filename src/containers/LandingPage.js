@@ -48,17 +48,17 @@ export default function LandingPage() {
             </div>
 
             {!isAuthenticated &&
-                <Grid container justify="center" spacing={3}>
-                    <Grid item xs={1}>
-                        <Button variant="contained" onClick={onRegisterClick}>Register</Button>
+                <Grid container justify="center" spacing={3} style={{ margin: 'initial', width: '100%' }}>
+                    <Grid item xs={3} sm={2} md={2} lg={1}>
+                        <Button fullWidth variant="contained" onClick={onRegisterClick}>Register</Button>
                     </Grid>
-                    <Grid item xs={1}>
-                        <Button variant="contained" onClick={onLoginClick}>Login</Button>
+                    <Grid item xs={3} sm={2} md={2} lg={1}>
+                        <Button fullWidth variant="contained" onClick={onLoginClick}>Login</Button>
                     </Grid>
                 </Grid>
             }
 
-            <Grid container justify="center" spacing={3} style={contentStyle}>
+            <Grid container justify="center" spacing={3} style={contentStyle} style={{ margin: 'initial', marginTop: 30, width: '100%' }}>
                 {[{
                     key: 'need-assistance',
                     image: '/images/office-no-help.jpg',
