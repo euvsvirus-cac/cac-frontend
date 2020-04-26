@@ -46,19 +46,19 @@ const useStyles = makeStyles((theme) => ({
         width: theme.spacing(5),
         height: theme.spacing(5),
         marginRight: theme.spacing(1),
-        color: '#af9500'
+        color: '#af9500',
     },
     ratingSilver: {
         width: theme.spacing(5),
         height: theme.spacing(5),
         marginRight: theme.spacing(1),
-        color: '#b4b4b4'
+        color: '#b4b4b4',
     },
     ratingBronze: {
         width: theme.spacing(5),
         height: theme.spacing(5),
         marginRight: theme.spacing(1),
-        color: '#6a3805'
+        color: '#a05f28',
     },
 }));
 
