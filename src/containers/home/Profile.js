@@ -91,9 +91,9 @@ export default function Profile() {
             </div>
 
             { /* Status row */}
-            < Typography variant="h6">
+            <Typography variant="h6">
                 Status
-            </Typography >
+            </Typography>
             <FormControl component="fieldset" >
                 <FormGroup aria-label="position" row>
                     <FormControlLabel
@@ -103,12 +103,12 @@ export default function Profile() {
                         labelPlacement="end"
                     />
                 </FormGroup>
-            </FormControl >
+            </FormControl>
 
             { /* Skills */}
             < Typography variant="h6" gutterBottom >
                 Skills
-            </Typography >
+            </Typography>
 
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
                 <StarIcon className={classes.ratingGold} />
