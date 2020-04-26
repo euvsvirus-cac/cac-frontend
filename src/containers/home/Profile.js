@@ -59,7 +59,7 @@ export default function Profile() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get(BASE_URL + 'me', { params: {}, headers: { 'Authorization': `Bearer ${token}` } });
+            const result = await axios.get(BASE_URL + 'user/me', { params: {}, headers: { 'Authorization': `Bearer ${token}` } });
             setData(result.data);
             setStatus(!!result.data.available);
         }
@@ -69,13 +69,13 @@ export default function Profile() {
     const toggleStatus = () => {
         const available = !status;
         setStatus(available);
-        axios.put(BASE_URL + 'me/status', { available }, { params: {}, headers: { 'Authorization': `Bearer ${token}` } })
+        axios.put(BASE_URL + 'user/me/status', { available }, { params: {}, headers: { 'Authorization': `Bearer ${token}` } })
     }
 
     return (
         <div className={classes.root}>
             { /* Avatar + Profile name etc. */}
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', marginBottom: 8 }}>
                 <Avatar variant="square" src="/static/images/avatar/1.jpg" className={classes.profileAvatar} />
 
                 <div style={{ display: 'block' }}>
@@ -91,6 +91,9 @@ export default function Profile() {
             </div>
 
             { /* Status row */}
+            < Typography variant="h6">
+                Status
+            </Typography >
             <FormControl component="fieldset" >
                 <FormGroup aria-label="position" row>
                     <FormControlLabel
