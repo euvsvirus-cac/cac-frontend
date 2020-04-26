@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import axios from 'axios';
 
+import useDebounce from '../../util/debounce';
 import TeamUser from './TeamUser';
 import { useAppContext } from '../../context/AppContext';
 import { BASE_URL } from '../../constants';
@@ -34,15 +35,17 @@ export default function Team() {
     const { token } = useAppContext();
 
     const [search, setSearch] = useState('');
+    const debouncedSearch = useDebounce(search, 250);
+
     const [team, setTeam] = useState({ name: '', users: [], skills: [] });
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get(BASE_URL + 'team', { params: {}, headers: { 'Authorization': `Bearer ${token}` } });
+            const result = await axios.get(BASE_URL + 'team', { params: { filter: search }, headers: { 'Authorization': `Bearer ${token}` } });
             setTeam(result.data);
         }
         fetchData();
-    }, [token]);
+    }, [token, debouncedSearch]);
 
     const renderUsers = (available = true) => {
         const filteredUsers = team.users
@@ -85,6 +88,7 @@ export default function Team() {
                     fullWidth
                     label="Filter skills"
                     margin="normal"
+                    onChange={(event) => { setSearch(event.target.value) }}
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
