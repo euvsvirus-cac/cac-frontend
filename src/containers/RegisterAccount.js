@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+
+import { BASE_URL } from '../constants';
 
 import axios from 'axios';
 
@@ -26,14 +28,13 @@ const RegisterAccount = (props) => {
     const history = useHistory();
 
     const handleSignUpClick = (event) => {
-        const apiBaseUrl = "http://basehack1.informatik.uni-hamburg.de/api/";
         const payload = {
             "email": email,
             "fullName": name,
             "password": password,
         }
 
-        axios.post(apiBaseUrl + 'register', payload)
+        axios.post(BASE_URL + 'register', payload)
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);

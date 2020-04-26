@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 
 import { AppContext } from "../context/AppContext";
+import { BASE_URL } from '../constants';
 
 const style = {
     margin: 15,
@@ -33,13 +34,12 @@ class Login extends Component {
     handleClick = (event) => {
         const me = this;
 
-        const apiBaseUrl = "http://basehack1.informatik.uni-hamburg.de/api/";
         const payload = {
             "email": this.state.username,
             "password": this.state.password
         }
 
-        axios.post(apiBaseUrl + 'login', payload)
+        axios.post(BASE_URL + 'login', payload)
             .then((response) => {
                 if (response.status === 200 && response.data.token) {
                     me.handleSuccessfulLogin(response.data.token);
