@@ -12,7 +12,10 @@ const wrapperStyle = {
 }
 
 function App() {
-  const [isAuthenticated, userHasAuthenticated] = useState(false);
+
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  const [isAuthenticated, userHasAuthenticated] = useState(!!jwtToken);
+  const [token, setToken] = useState(jwtToken || null);
 
   return (
     <>
