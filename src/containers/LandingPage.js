@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Home() {
+export default function LandingPage() {
     const { isAuthenticated } = useAppContext();
 
     const classes = useStyles();
