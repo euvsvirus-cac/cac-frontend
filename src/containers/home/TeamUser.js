@@ -11,7 +11,8 @@ import PhoneIcon from '@material-ui/icons/Phone';
 
 export default function TeamUser(props) {
 
-    const skills = props.user.skills.map((s) => s.name).join(', ');
+    const user = props.user;
+    const skills = user.skills.map((s) => s.name).join(', ');
 
     return (
         <ListItem style={{ paddingLeft: 0 }}>
@@ -19,16 +20,30 @@ export default function TeamUser(props) {
                 <Avatar alt={props.user.fullName} src="/static/images/avatar/1.jpg" />
             </ListItemAvatar>
             <ListItemText
-                primary={props.user.fullName}
-                secondary={'Skills: ' + skills}
+                style={{ paddingRight: 28 }}
+                primary={user.fullName}
+                secondary={skills}
             />
             <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+
+                <IconButton edge="end" aria-label="phone" disabled>
                     <PhoneIcon />
                 </IconButton>
-                <IconButton edge="end" aria-label="delete">
+
+                <IconButton edge="end" aria-label="mail" href={'mailto:' + user.email}>
                     <MailIcon />
                 </IconButton>
+
+                {user.slackUid &&
+                    <IconButton
+                        edge="end"
+                        aria-label="slack"
+                        target="_blank"
+                        href={`https://euvsvirus.slack.com/team/${user.slackUid}`}
+                    >
+                        <Avatar style={{ height: 24, width: 24 }} src="/images/slack.png" />
+                    </IconButton>
+                }
             </ListItemSecondaryAction>
         </ListItem>
     )
