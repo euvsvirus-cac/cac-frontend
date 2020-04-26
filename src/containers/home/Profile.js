@@ -55,21 +55,25 @@ const useStyles = makeStyles((theme) => ({
 export default function Profile() {
 
     const classes = useStyles();
-
-    const [status, setStatus] = useState(false);
-    const toggleStatus = () => setStatus(!status);
+    const { token } = useAppContext();
 
     const [data, setData] = useState({ fullName: '', title: '', skills: [] });
-
-    const { token } = useAppContext();
+    const [status, setStatus] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios.get(BASE_URL + 'me', { params: {}, headers: { 'Authorization': `Bearer ${token}` } });
             setData(result.data);
+            setStatus(!!result.data.available);
         }
         fetchData();
     }, [token]);
+
+    const toggleStatus = () => {
+        const available = !status;
+        setStatus(available);
+        axios.put(BASE_URL + 'me/status', { available }, { params: {}, headers: { 'Authorization': `Bearer ${token}` } })
+    }
 
     return (
         <div className={classes.root}>
@@ -79,7 +83,7 @@ export default function Profile() {
 
                 <div style={{ display: 'block' }}>
                     <Typography variant="h5" gutterBottom>
-                        {data.fullName}
+                        {data.fullName}&nbsp;
                     </Typography>
                     <Typography variant="body1" gutterBottom>
                         Senior Software Engineer
