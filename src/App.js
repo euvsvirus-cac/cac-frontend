@@ -16,13 +16,17 @@ function App() {
   const jwtToken = sessionStorage.getItem('jwtToken');
   const [isAuthenticated, userHasAuthenticated] = useState(!!jwtToken);
   const [token, setToken] = useState(jwtToken || null);
+  const updateToken = (token) => {
+    sessionStorage.setItem('jwtToken', token);
+    setToken(token);
+  }
 
   return (
     <>
       <Header />
       <div className="App">
         <div style={wrapperStyle}>
-          <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+          <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, token, updateToken }}>
             <Routes />
           </AppContext.Provider>
         </div>

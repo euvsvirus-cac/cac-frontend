@@ -26,8 +26,8 @@ class Login extends Component {
     }
 
     handleSuccessfulLogin = (token) => {
-        sessionStorage.setItem('jwtToken', token);
         this.context.userHasAuthenticated(true);
+        this.context.updateToken(token);
         this.props.history.replace('/');
     }
 
