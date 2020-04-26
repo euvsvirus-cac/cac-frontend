@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -24,6 +25,14 @@ const useStyles = makeStyles({
 
 export default function LandingPage() {
     const { isAuthenticated } = useAppContext();
+    const history = useHistory();
+
+    const onLoginClick = () => {
+        history.push('/login');
+    }
+    const onRegisterClick = () => {
+        history.push('/register');
+    }
 
     const classes = useStyles();
 
@@ -41,11 +50,10 @@ export default function LandingPage() {
             {!isAuthenticated &&
                 <Grid container justify="center" spacing={3}>
                     <Grid item xs={1}>
-                        <Link to="/login">Login</Link>
+                        <Button variant="contained" onClick={onRegisterClick}>Register</Button>
                     </Grid>
-
                     <Grid item xs={1}>
-                        <Link to="/register">Register</Link>
+                        <Button variant="contained" onClick={onLoginClick}>Login</Button>
                     </Grid>
                 </Grid>
             }
