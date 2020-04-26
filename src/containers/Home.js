@@ -36,13 +36,21 @@ export default function Home() {
                 <Typography style={claimStyle} gutterBottom variant="h5" component="h2">
                     Enable effective collaboration and break the feeling of isolation working from home.
                 </Typography>
-
-                {!isAuthenticated &&
-                    <Link to="/login">Login</Link>
-                }
             </div>
 
-            <Grid container alignItems="center" justify="center" spacing={3} style={contentStyle}>
+            {!isAuthenticated &&
+                <Grid container justify="center" spacing={3}>
+                    <Grid item xs={1}>
+                        <Link to="/login">Login</Link>
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        <Link to="/register">Register</Link>
+                    </Grid>
+                </Grid>
+            }
+
+            <Grid container justify="center" spacing={3} style={contentStyle}>
                 {[{
                     key: 'need-assistance',
                     image: '/images/office-no-help.jpg',
