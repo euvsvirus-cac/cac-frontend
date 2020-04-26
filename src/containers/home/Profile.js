@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import StarIcon from '@material-ui/icons/Stars';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +9,11 @@ import Switch from '@material-ui/core/Switch';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+
+import axios from 'axios';
+
+import { useAppContext } from '../../context/AppContext';
+import { BASE_URL } from '../../constants';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,6 +59,18 @@ export default function Profile() {
     const [status, setStatus] = useState(false);
     const toggleStatus = () => setStatus(!status);
 
+    const [data, setData] = useState({ fullName: '', title: '', skills: [] });
+
+    const { token } = useAppContext();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios.get(BASE_URL + 'me', { params: {}, headers: { 'Authorization': `Bearer ${token}` } });
+            setData(result.data);
+        }
+        fetchData();
+    }, [token]);
+
     return (
         <div className={classes.root}>
             { /* Avatar + Profile name etc. */}
@@ -62,11 +79,11 @@ export default function Profile() {
 
                 <div style={{ display: 'block' }}>
                     <Typography variant="h5" gutterBottom>
-                        Romeo Ward
-                        </Typography>
+                        {data.fullName}
+                    </Typography>
                     <Typography variant="body1" gutterBottom>
                         Senior Software Engineer
-                        </Typography>
+                    </Typography>
                 </div>
             </div >
 
