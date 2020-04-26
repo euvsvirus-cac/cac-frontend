@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { AppContext } from "../context/AppContext";
 
 import RegisterAccount from './RegisterAccount'
+import RegisterJoinTeam from './RegisterJoinTeam';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -40,7 +41,7 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 0,
+            value: 1,
         }
     }
 
@@ -60,7 +61,7 @@ class Register extends Component {
 
         return (
             <div style={{ display: 'flex', justifyContent: 'center', padding: 40 }}>
-                <Paper style={{ width: 360, padding: 20 }}>
+                <Paper style={{ width: 380, padding: 20 }}>
                     <div>
                         <Tabs value={this.state.value} onChange={handleChange} aria-label="simple tabs example">
                             <Tab label="New account" {...this.a11yProps(0)} />
@@ -73,7 +74,7 @@ class Register extends Component {
                     </TabPanel>
 
                     <TabPanel value={this.state.value} index={1}>
-                        TODO.
+                        <RegisterJoinTeam />
                     </TabPanel>
                 </Paper>
             </div >

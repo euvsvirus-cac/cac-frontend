@@ -33,6 +33,7 @@ export default function Team() {
 
     const { token } = useAppContext();
 
+    const [search, setSearch] = useState('');
     const [team, setTeam] = useState({ name: '', users: [], skills: [] });
 
     useEffect(() => {

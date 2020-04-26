@@ -57,7 +57,7 @@ class Login extends Component {
     render() {
         return (
             <div style={{ display: 'flex', justifyContent: 'center', padding: 40 }}>
-                <Paper style={{ width: 240, padding: 20 }}>
+                <Paper style={{ width: 380, padding: 20 }}>
 
                     <Typography gutterBottom variant="h5" component="h2">
                         Login
@@ -67,6 +67,7 @@ class Login extends Component {
                         <TextField
                             type="email"
                             required
+                            fullWidth
                             variant="outlined"
                             label="Email"
                             margin="normal"
@@ -76,6 +77,7 @@ class Login extends Component {
                         <TextField
                             type="password"
                             required
+                            fullWidth
                             variant="outlined"
                             margin="normal"
                             label="Password"
