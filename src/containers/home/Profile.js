@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import StarIcon from '@material-ui/icons/Stars';
 import Typography from '@material-ui/core/Typography';
@@ -19,17 +20,13 @@ const useStyles = makeStyles((theme) => ({
     root: {
         padding: 12,
         display: 'block',
-        width: theme.spacing(42),
+        minWidth: theme.spacing(42),
+        maxWidth: theme.spacing(60),
         textAlign: 'initial',
     },
-    profilePaper: {
-        padding: 12,
-        display: 'block',
-        width: theme.spacing(42),
-    },
     profileAvatar: {
-        width: theme.spacing(8),
-        height: theme.spacing(8),
+        width: theme.spacing(9),
+        height: theme.spacing(9),
         marginRight: 12,
     },
     ratingGold: {
@@ -82,17 +79,19 @@ export default function Profile() {
                 <Avatar variant="square" src="/static/images/avatar/1.jpg" className={classes.profileAvatar} />
 
                 <div style={{ display: 'block' }}>
-                    <Typography variant="h5" gutterBottom>
+                    <Typography variant="h5">
                         {data.fullName}&nbsp;
                     </Typography>
-                    <Typography variant="body1" gutterBottom>
+                    <Typography variant="body1">
                         Senior Software Engineer
                     </Typography>
+
+                    <Link to="/profile">Edit Profile</Link>
                 </div>
-            </div >
+            </div>
 
             { /* Status row */}
-            < FormControl component="fieldset" >
+            <FormControl component="fieldset" >
                 <FormGroup aria-label="position" row>
                     <FormControlLabel
                         value="end"
@@ -106,25 +105,25 @@ export default function Profile() {
             { /* Skills */}
             < Typography variant="h6" gutterBottom >
                 Skills
-                </Typography >
+            </Typography >
 
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
                 <StarIcon className={classes.ratingGold} />
                 <Typography variant="body1">
                     Java, SQL (+3)
-                    </Typography>
+                </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
                 <StarIcon className={classes.ratingSilver} />
                 <Typography variant="body1">
                     Hibernate, Go, RxJava (+8)
-                    </Typography>
+                </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
                 <StarIcon className={classes.ratingBronze} />
                 <Typography variant="body1">
                     Kotlin, React, Gradle (+14)
-                    </Typography>
+                </Typography>
             </div>
         </div>
     );
