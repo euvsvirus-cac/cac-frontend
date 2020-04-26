@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./containers/home/Home";
+import EditProfile from "./containers/EditProfile";
 import LandingPage from "./containers/LandingPage";
 import Login from './containers/Login'
 import NotFound from "./containers/NotFound";
@@ -18,6 +19,12 @@ export default function Routes() {
                     <LandingPage />
                 }
             </Route>
+
+            {isAuthenticated &&
+                <Route exact path="/profile">
+                    <EditProfile />
+                </Route>
+            }
 
             <Route exact path="/login">
                 <Login />
