@@ -21,16 +21,27 @@ function App() {
     setToken(token);
   }
 
+  const logout = () => {
+    userHasAuthenticated(false);
+    sessionStorage.clear();
+  }
+
   return (
     <>
-      <Header />
-      <div className="App">
-        <div style={wrapperStyle}>
-          <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, token, updateToken }}>
+      <AppContext.Provider value={{
+        isAuthenticated,
+        userHasAuthenticated,
+        token,
+        updateToken,
+        logout,
+      }}>
+        <Header />
+        <div className="App">
+          <div style={wrapperStyle}>
             <Routes />
-          </AppContext.Provider>
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     </>
   );
 }
