@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Home from "./containers/Home";
+import Home from "./containers/home/Home";
 import LandingPage from "./containers/LandingPage";
 import Login from './containers/Login'
 import NotFound from "./containers/NotFound";
